@@ -242,7 +242,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Htw-TM-SvL">
                                 <rect key="frame" x="20" y="285" width="250" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="clD-cF-2Uh"/>
+                                    <constraint firstAttribute="width" constant="250" id="zbT-B5-ym9"/>
                                 </constraints>
                                 <state key="normal" title="Login"/>
                                 <connections>
@@ -251,6 +251,9 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDu-AD-sXk">
                                 <rect key="frame" x="330" y="285" width="250" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="zQk-zD-py6"/>
+                                </constraints>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <segue destination="Fcf-4V-saW" kind="show" id="Li6-Zt-GCZ"/>
@@ -259,11 +262,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Htw-TM-SvL" firstAttribute="leading" secondItem="7P5-Py-FTB" secondAttribute="leadingMargin" id="45e-e1-fPv"/>
-                            <constraint firstItem="fDu-AD-sXk" firstAttribute="leading" secondItem="Htw-TM-SvL" secondAttribute="trailing" constant="60" id="GnK-Is-uD2"/>
-                            <constraint firstItem="fDu-AD-sXk" firstAttribute="trailing" secondItem="7P5-Py-FTB" secondAttribute="trailingMargin" id="ZaI-8s-P0a"/>
-                            <constraint firstItem="Htw-TM-SvL" firstAttribute="baseline" secondItem="fDu-AD-sXk" secondAttribute="baseline" id="hu8-Nj-k1d"/>
-                            <constraint firstItem="fDu-AD-sXk" firstAttribute="centerY" secondItem="7P5-Py-FTB" secondAttribute="centerY" id="wZD-Qa-eKd"/>
+                            <constraint firstItem="6IN-L9-JA1" firstAttribute="top" secondItem="fDu-AD-sXk" secondAttribute="bottom" constant="285" id="Bwt-hn-oOj"/>
+                            <constraint firstItem="Htw-TM-SvL" firstAttribute="top" secondItem="6y5-Sx-j7i" secondAttribute="bottom" constant="221" id="Tbh-8H-twW"/>
+                            <constraint firstItem="fDu-AD-sXk" firstAttribute="trailing" secondItem="7P5-Py-FTB" secondAttribute="trailingMargin" id="YsK-3I-fae"/>
+                            <constraint firstItem="Htw-TM-SvL" firstAttribute="leading" secondItem="7P5-Py-FTB" secondAttribute="leadingMargin" id="nGx-RY-fdw"/>
+                            <constraint firstItem="fDu-AD-sXk" firstAttribute="top" secondItem="6y5-Sx-j7i" secondAttribute="bottom" constant="221" id="pFj-w3-JrX"/>
+                            <constraint firstItem="6IN-L9-JA1" firstAttribute="top" secondItem="Htw-TM-SvL" secondAttribute="bottom" constant="285" id="qOf-av-8ej"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="U7g-ek-pur"/>

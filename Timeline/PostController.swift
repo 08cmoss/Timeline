@@ -52,10 +52,9 @@ class PostController {
     
     static func mockPosts() -> [Post] {
         
-        return [
-            Post(imageEndPoint: "-K1l4125TYvKMc7rcp5e", caption: nil, username: "", comments: [], likes: [], identifier: nil),
-            Post(imageEndPoint: "-K1l4125TYvKMc7rcp5e", caption: nil, username: "", comments: [], likes: [], identifier: nil),
-            Post(imageEndPoint: "-K1l4125TYvKMc7rcp5e", caption: nil, username: "", comments: [], likes: [], identifier: nil)
-            ]
+        let post1 = Post(imageEndPoint: "-K1l4125TYvKMc7rcp5e", caption: "So much fun", username: "", comments: [], likes: [], identifier: nil)
+        let post2 = Post(imageEndPoint: "-K1l4125TYvKMc7rcp5e", caption: "What a day", username: "", comments: [], likes: [], identifier: nil)
+        let post3 = Post(imageEndPoint: "-K1l4125TYvKMc7rcp5e", caption: "This was crazy", username: "", comments: [], likes: [], identifier: nil)
+            return [post1, post2, post3]
     }
 }

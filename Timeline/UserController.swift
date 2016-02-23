@@ -56,11 +56,12 @@ class UserController {
     
     static func mockUsers() -> [User] {
         
-        return [
-            User(username: "Cameron", bio: nil, url: nil, identifier: nil),
-            User(username: "Jake", bio: nil, url: nil, identifier: nil),
-            User(username: "Michael", bio: nil, url: nil, identifier: nil)
-            ]
+        
+        let user1 = User(username: "Cameron", bio: nil, url: nil, identifier: nil)
+        let user2 = User(username: "Jake", bio: nil, url: nil, identifier: nil)
+        let user3 = User(username: "Michael", bio: nil, url: nil, identifier: nil)
+        return [user1, user2, user3]
+        
     }
     
     

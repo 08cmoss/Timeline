@@ -53,7 +53,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ZT3-EL-LNu">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" id="ZT3-EL-LNu">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZT3-EL-LNu" id="3Nq-dA-LNZ">
@@ -79,8 +79,14 @@
                                 <segment title="Friends"/>
                                 <segment title="Add Friend"/>
                             </segments>
+                            <connections>
+                                <action selector="selectedIndexChanged:" destination="LBb-Uz-KOo" eventType="valueChanged" id="ieE-Ru-IxU"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
+                    <connections>
+                        <outlet property="modeSegmentedControl" destination="oFY-FD-BXm" id="ddF-Kw-Qhw"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQl-Eo-V4U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -302,7 +308,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="Fcf-4V-saW" kind="show" id="gv1-ld-pOO"/>
+                                            <segue destination="Fcf-4V-saW" kind="show" identifier="loginSegue" id="gv1-ld-pOO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDu-AD-sXk">
@@ -312,7 +318,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="Fcf-4V-saW" kind="show" id="Li6-Zt-GCZ"/>
+                                            <segue destination="Fcf-4V-saW" kind="show" identifier="signUpSegue" id="Li6-Zt-GCZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -451,8 +457,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="AEu-ys-Wog"/>
-        <segue reference="UeM-N9-YaK"/>
-        <segue reference="Li6-Zt-GCZ"/>
+        <segue reference="gv1-ld-pOO"/>
+        <segue reference="dKu-jz-REN"/>
         <segue reference="kMX-LC-87c"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -90,6 +90,8 @@ class LoginSignUpViewController: UIViewController {
             })
         
             }
+        } else {
+            self.presentValidationAlertWithTitle("Error", message: "One of your fields is empty.")
         }
     }
     
@@ -100,6 +102,7 @@ class LoginSignUpViewController: UIViewController {
             print("Please try again.")
         }
         alertController.addAction(alert)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZY8-re-7bV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="WC6-QI-k8v">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -367,7 +367,7 @@
                         <segue destination="f87-2h-uPO" kind="relationship" relationship="viewControllers" id="Fsf-9y-KUT"/>
                         <segue destination="KfP-8n-Anz" kind="relationship" relationship="viewControllers" id="woP-iW-pDc"/>
                         <segue destination="O7e-gr-yIs" kind="relationship" relationship="viewControllers" id="W6j-Mi-5bM"/>
-                        <segue destination="GFj-cD-uXd" kind="presentation" id="AEu-ys-Wog"/>
+                        <segue destination="GFj-cD-uXd" kind="presentation" identifier="presentModally" id="AEu-ys-Wog"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDi-2X-u7h" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -12,7 +12,7 @@ class UserController {
     
     static let sharedController = UserController()
     
-    var currentUser: User! = User(username: "Cameron", bio: nil, url: nil, identifier: nil)
+    var currentUser: User? //= User(username: "Cameronn", bio: nil, url: nil, identifier: nil)
     
     static func userForIdentifier(identifier: String, completion: (user: User?) -> Void) {
         

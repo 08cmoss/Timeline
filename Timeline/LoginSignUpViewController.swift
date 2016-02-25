@@ -22,7 +22,7 @@ class LoginSignUpViewController: UIViewController {
         case SignUp
     }
     
-    var mode: ViewMode = .SignUp
+    var mode: ViewMode = .Login
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,17 +74,32 @@ class LoginSignUpViewController: UIViewController {
         case .SignUp:
             UserController.createUser(emailTextField.text!, username: usernameTextField.text!, password: passwordTextField.text!, bio: bioTextField.text, url: websiteTextField.text, completion: { (success, user) -> Void in
                 if success {
-                    
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                } else {
+                    self.presentValidationAlertWithTitle("Unsuccessful", message: "Failed to sign up")
                 }
             })
             
         case .Login:
             UserController.authenticateUser(emailTextField.text!, password: passwordTextField.text!, completion: { (success, user) -> Void in
-                
+                if success {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                } else {
+                    self.presentValidationAlertWithTitle("Unsuccessful", message: "Failed to login")
+                }
             })
         
             }
         }
+    }
+    
+    func presentValidationAlertWithTitle(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        let alert = UIAlertAction(title: "Try Again", style: .Destructive) { (alert) -> Void in
+            print("Please try again.")
+        }
+        alertController.addAction(alert)
     }
     
 

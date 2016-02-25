@@ -8,9 +8,12 @@
 
 import UIKit
 
-class UserSearchTableViewController: UITableViewController {
+class UserSearchTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var usersDataSource: [User] = []
+    
+    
+    var searchController: UISearchController!
     
     @IBOutlet weak var modeSegmentedControl: UISegmentedControl!
     
@@ -49,6 +52,9 @@ class UserSearchTableViewController: UITableViewController {
         super.viewDidLoad()
 
         updateViewBasedOnMode()
+        setUpSearchController()
+        
+        
     }
     
     
@@ -78,6 +84,31 @@ class UserSearchTableViewController: UITableViewController {
         return cell
     }
     
+    func setUpSearchController() {
+        
+        let resultsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SearchResultsVC")
+        
+        searchController = UISearchController(searchResultsController: resultsController)
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.searchBar.placeholder = "Search friends..."
+        
+        tableView.tableHeaderView = searchController.searchBar
+        definesPresentationContext = true
+        
+    }
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchTerm = searchController.searchBar.text?.lowercaseString ?? ""
+        
+        let filteredUsers = usersDataSource.filter { $0.username.lowercaseString.containsString(searchTerm)}
+        guard let resultsController = searchController.searchResultsController as? UserSearchResultsTableViewController else { return }
+        
+        resultsController.usersResultsDataSource = filteredUsers
+        resultsController.tableView.reloadData()
+        
+    }
+    
+        
 
     /*
     // Override to support conditional editing of the table view.
@@ -114,14 +145,29 @@ class UserSearchTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "toProfileSegue" {
+            guard let cell = sender as? UITableViewCell else {return}
+            if let indexPath = tableView.indexPathForCell(cell) {
+                
+                let user = usersDataSource[indexPath.row]
+                
+                let destinationViewController = segue.destinationViewController as? ProfileViewController
+                destinationViewController?.user = user
+            } else if let indexPath = (searchController.searchResultsController as? UserSearchResultsTableViewController)?.tableView.indexPathForCell(cell) {
+                let user = (searchController.searchResultsController as! UserSearchResultsTableViewController).usersResultsDataSource[indexPath.row]
+                
+                let destinationViewController = segue.destinationViewController as? ProfileViewController
+                destinationViewController?.user = user
+            }
+        }
     }
-    */
-
+    
+    
 }

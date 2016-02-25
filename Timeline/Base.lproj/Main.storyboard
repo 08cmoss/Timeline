@@ -61,7 +61,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="yZ1-Wp-BZb" kind="show" id="dKu-jz-REN"/>
+                                    <segue destination="yZ1-Wp-BZb" kind="show" identifier="toProfileSegue" id="dKu-jz-REN"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -91,6 +91,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQl-Eo-V4U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1841" y="996"/>
+        </scene>
+        <!--User Search Results Table View Controller-->
+        <scene sceneID="GqG-QS-27j">
+            <objects>
+                <tableViewController storyboardIdentifier="SearchResultsVC" id="OPZ-rj-ctI" customClass="UserSearchResultsTableViewController" customModule="Timeline" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="I62-7J-H6E">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="userSearchResultsCell" id="1hI-uP-7XC">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1hI-uP-7XC" id="hRD-ry-SZc">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="OPZ-rj-ctI" id="5NB-ge-IdS"/>
+                            <outlet property="delegate" destination="OPZ-rj-ctI" id="Znu-tM-y1W"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LRx-B8-sUd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2539" y="995"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="D7O-y0-jfO">

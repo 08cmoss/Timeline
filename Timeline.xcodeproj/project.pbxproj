@@ -27,6 +27,7 @@
 		7451CCE91C7D0A5800AF6C37 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7451CCE81C7D0A5800AF6C37 /* UserController.swift */; };
 		7451CCEB1C7D13CE00AF6C37 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7451CCEA1C7D13CE00AF6C37 /* PostController.swift */; };
 		7451CCED1C7D19EA00AF6C37 /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7451CCEC1C7D19EA00AF6C37 /* ImageController.swift */; };
+		7451CD741C7EAAD000AF6C37 /* UserSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7451CD731C7EAAD000AF6C37 /* UserSearchResultsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		7451CCE81C7D0A5800AF6C37 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		7451CCEA1C7D13CE00AF6C37 /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		7451CCEC1C7D19EA00AF6C37 /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
+		7451CD731C7EAAD000AF6C37 /* UserSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSearchResultsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 				7451CCD81C7D004F00AF6C37 /* AddPhotoTableViewController.swift */,
 				7451CCD61C7CFEB700AF6C37 /* ProfileViewController.swift */,
 				7451CCD41C7CFC7A00AF6C37 /* UserSearchTableViewController.swift */,
+				7451CD731C7EAAD000AF6C37 /* UserSearchResultsTableViewController.swift */,
 				7451CCD21C7CFA7000AF6C37 /* PostDetailTableViewController.swift */,
 				7451CCD01C7CF9D300AF6C37 /* TimelineTableViewController.swift */,
 			);
@@ -322,6 +325,7 @@
 				7451CCDD1C7D033000AF6C37 /* LoginSignUpViewController.swift in Sources */,
 				7451CCD91C7D004F00AF6C37 /* AddPhotoTableViewController.swift in Sources */,
 				7451CCD11C7CF9D300AF6C37 /* TimelineTableViewController.swift in Sources */,
+				7451CD741C7EAAD000AF6C37 /* UserSearchResultsTableViewController.swift in Sources */,
 				7451CCE51C7D07F200AF6C37 /* Post.swift in Sources */,
 				01E3FC251BE92C7600187536 /* AppDelegate.swift in Sources */,
 				7451CCED1C7D19EA00AF6C37 /* ImageController.swift in Sources */,

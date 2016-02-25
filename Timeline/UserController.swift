@@ -23,15 +23,15 @@ class UserController {
     }
     
     static func followUser(user: User, completion: (success: Bool) -> Void) {
-        
+        completion(success: true)
     }
     
     static func unfollowUser(user: User, completion: (success: Bool) -> Void) {
-        
+        completion(success: true)
     }
     
     static func userFollowsUser(user: User, user2: User, completion: (followsUser: Bool) -> Void) {
-        
+        completion(followsUser: true)
     }
     
     static func followedByUser(user: User, completion: (users: [User]?) -> Void) {
@@ -39,15 +39,15 @@ class UserController {
     }
     
     static func authenticateUser(email: String, password: String, completion: (success: Bool, user: User?) -> Void) {
-        
+        completion(success: true, user: mockUsers().first)
     }
     
     static func createUser(email: String, username: String, password: String, bio: String?, url: String?, completion: (success: Bool, user: User?) -> Void) {
-        
+        completion(success: true, user: mockUsers().first)
     }
     
     static func updateUser(user: User, username: String, bio: String?, url: String?, completion: (success: Bool, user: User?) -> Void) {
-        
+        completion(success: true, user: mockUsers().first)
     }
     
     static func logOutCurrentUser() {

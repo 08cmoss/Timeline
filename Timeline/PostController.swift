@@ -15,11 +15,11 @@ class PostController {
     }
     
     static func addPost(image: String, caption: String?, completion: (success: Bool, post: Post?) -> Void) {
-        
+        completion(success: true, post: mockPosts().first)
     }
     
     static func postFromIdentifier(identifier: String, completion: (post: Post?) -> Void) {
-        
+        completion(post: mockPosts().first)
     }
     
     static func postsForUser(user: User, completion: (posts: [Post]?) -> Void) {
@@ -31,19 +31,19 @@ class PostController {
     }
     
     static func addCommentWithTextToPost(text: String, post: Post, completion: (success: Bool, post: Post?) -> Void) {
-        
+        completion(success: true, post: mockPosts().first)
     }
     
     static func deleteComment(comment: Comment, completion: (success: Bool, post: Post?) -> Void) {
-        
+        completion(success: true, post: mockPosts().first)
     }
     
     static func addLikeToPost(post: Post, completion: (success: Bool, post: Post?) -> Void) {
-        
+        completion(success: true, post: mockPosts().first)
     }
     
     static func deleteLike(like: Like, completion: (success: Bool, post: Post?) -> Void) {
-        
+        completion(success: true, post: mockPosts().first)
     }
     
     static func orderPosts(postsArray: [Post]) -> [Post] {

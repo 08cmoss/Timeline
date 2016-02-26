@@ -52,6 +52,8 @@ class UserController {
     
     static func logOutCurrentUser() {
         
+        sharedController.currentUser = nil
+        
     }
     
     static func mockUsers() -> [User] {

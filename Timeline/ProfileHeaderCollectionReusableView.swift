@@ -43,7 +43,7 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
             followButton.setTitle("Logout", forState: .Normal)
         } else{
             followButton.hidden = false
-            UserController.userFollowsUser(UserController.sharedController.currentUser, user2: user, completion: { (follows) -> Void in
+            UserController.userFollowsUser(UserController.sharedController.currentUser!, user2: user, completion: { (follows) -> Void in
                 if follows {
                     self.followButton.setTitle("Unfollow", forState: .Normal)
                 } else {

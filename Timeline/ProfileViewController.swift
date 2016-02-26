@@ -105,6 +105,7 @@ extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
         if user == UserController.sharedController.currentUser {
             
             UserController.logOutCurrentUser()
+            
             tabBarController?.selectedViewController = tabBarController?.viewControllers![0]
             
         }else {

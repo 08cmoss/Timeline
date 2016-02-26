@@ -95,7 +95,7 @@ class LoginSignUpViewController: UIViewController {
         switch mode {
         case .SignUp:
             UserController.createUser(emailTextField.text!, username: usernameTextField.text!, password: passwordTextField.text!, bio: bioTextField.text, url: websiteTextField.text, completion: { (success, user) -> Void in
-                if success {
+                if success, let _ = user {
                     self.dismissViewControllerAnimated(true, completion: nil)
                 } else {
                     self.presentValidationAlertWithTitle("Unsuccessful", message: "Failed to sign up")
@@ -104,7 +104,7 @@ class LoginSignUpViewController: UIViewController {
             
         case .Login:
             UserController.authenticateUser(emailTextField.text!, password: passwordTextField.text!, completion: { (success, user) -> Void in
-                if success {
+                if success, let _ = user {
                     self.dismissViewControllerAnimated(true, completion: nil)
                 } else {
                     self.presentValidationAlertWithTitle("Unsuccessful", message: "Failed to login")

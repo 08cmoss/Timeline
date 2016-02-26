@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
+class ProfileViewController: UIViewController, UICollectionViewDataSource{
     
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -18,6 +19,9 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if self.user == nil {
+            self.user = UserController.sharedController.currentUser
+        }
         print(user)
 
         // Do any additional setup after loading the view.
@@ -45,6 +49,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         if let user = user {
         headerCell.updateWithUser(user)
         }
+        headerCell.delegate = self
         return headerCell
     }
     
@@ -74,4 +79,40 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     */
 
+}
+extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
+    func userTappedURLButton() {
+        if let user = user {
+            let safariVC = SFSafariViewController(URL: NSURL(string: user.url ?? "")!)
+            self.presentViewController(safariVC, animated: true, completion: nil)
+        }
+    }
+    func userTappedFollowActionButton() {
+        guard let user = user else { return }
+        
+        if user == UserController.sharedController.currentUser {
+            
+            UserController.logOutCurrentUser()
+            tabBarController?.selectedViewController = tabBarController?.viewControllers![0]
+            
+        }else {
+            UserController.userFollowsUser(UserController.sharedController.currentUser, user2: user, completion:{ (followsUser) -> Void in
+                if followsUser {
+                    UserController.unfollowUser(self.user!, completion: { (success) -> Void in
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.updateBasedOnUser()
+                        })
+                    })
+                } else {
+                    UserController.followUser(self.user!, completion: { (success) -> Void in
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.updateBasedOnUser()
+                        })
+                    })
+                }
+            })
+            
+            
+        }
+    }
 }

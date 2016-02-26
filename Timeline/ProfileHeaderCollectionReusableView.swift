@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     
     @IBOutlet weak var bioLabel: UILabel!
@@ -18,7 +19,6 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     
     @IBAction func urlButtonTapped(sender: AnyObject) {
         delegate?.userTappedURLButton()
-        
     }
     
     
@@ -58,3 +58,4 @@ protocol ProfileHeaderCollectionReusableViewDelegate {
     func userTappedFollowActionButton ()
     func userTappedURLButton()
 }
+

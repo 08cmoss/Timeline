@@ -13,6 +13,8 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource{
     
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var editBarButtonItem: UIBarButtonItem!
+    
     var user: User?
     var userPosts: [Post] = []
 
@@ -21,6 +23,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource{
         
         if self.user == nil {
             self.user = UserController.sharedController.currentUser
+            editBarButtonItem.enabled = true
         }
         print(user)
 
@@ -45,7 +48,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource{
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        let headerCell =  collectionView.dequeueReusableSupplementaryViewOfKind("ProfileHeaderCollectionReusableView", withReuseIdentifier: "headerCell", forIndexPath: indexPath) as! ProfileHeaderCollectionReusableView
+        let headerCell =  collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "headerCell", forIndexPath: indexPath) as! ProfileHeaderCollectionReusableView
         if let user = user {
         headerCell.updateWithUser(user)
         }
@@ -69,15 +72,24 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource{
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "toEditProfile" {
+            let destinationViewController = segue.destinationViewController as? LoginSignUpViewController
+            
+            _ = destinationViewController?.view
+            if let user = user {
+            destinationViewController?.updateWithUser(user)
+            }
+        }
     }
-    */
+    
 
 }
 extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {

@@ -216,9 +216,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="u9b-WY-7dp"/>
+                    <navigationItem key="navigationItem" id="u9b-WY-7dp">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="edit" id="9aQ-Do-PRE">
+                            <connections>
+                                <segue destination="Fcf-4V-saW" kind="presentation" identifier="toEditProfile" id="Uxv-Th-gMc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Y6u-xw-ZAI" id="QyA-yb-Vdq"/>
+                        <outlet property="editBarButtonItem" destination="9aQ-Do-PRE" id="whg-Ip-EbC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pl3-x3-k9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -573,7 +580,7 @@
         <segue reference="H1B-0g-gMf"/>
         <segue reference="dKu-jz-REN"/>
         <segue reference="AEu-ys-Wog"/>
-        <segue reference="gv1-ld-pOO"/>
+        <segue reference="Uxv-Th-gMc"/>
         <segue reference="kMX-LC-87c"/>
     </inferredMetricsTieBreakers>
 </document>

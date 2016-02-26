@@ -20,9 +20,11 @@ class LoginSignUpViewController: UIViewController {
     enum ViewMode {
         case Login
         case SignUp
+        case Edit
     }
     
-    var mode: ViewMode = .Login
+    var mode: ViewMode = .Edit
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +43,17 @@ class LoginSignUpViewController: UIViewController {
                 guard let email = emailTextField.text, let password = passwordTextField.text else {return false}
                 return !email.isEmpty && !password.isEmpty
                 
+            case .Edit:
+                guard let username = usernameTextField.text else {return false}
+                return !username.isEmpty
             }
         }
     
+    }
+    
+    func updateWithUser(user: User) {
+        self.user = user
+        mode = .Edit
     }
     
     func updateViewBasedOnMode() {
@@ -63,7 +73,19 @@ class LoginSignUpViewController: UIViewController {
             bioTextField.hidden = true
             websiteTextField.hidden = true
             actionButton.setTitle("Login", forState: .Normal)
+           
+        case .Edit:
+            actionButton.setTitle("Update", forState: .Normal)
+            emailTextField.hidden = true
+            passwordTextField.hidden = true
+            
+            if let user = self.user {
+                usernameTextField.text = user.username
+                bioTextField.text = user.bio
+                websiteTextField.text = user.url
+            }
         }
+        
         
     }
     
@@ -88,7 +110,14 @@ class LoginSignUpViewController: UIViewController {
                     self.presentValidationAlertWithTitle("Unsuccessful", message: "Failed to login")
                 }
             })
-        
+        case .Edit:
+            UserController.updateUser(self.user!, username: self.usernameTextField.text!, bio: self.bioTextField.text, url: self.websiteTextField.text, completion: { (success, user) -> Void in
+                if success {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                } else {
+                    self.presentValidationAlertWithTitle("Unable to update user.", message: "Please check that your information is correct.")
+                }
+            })
             }
         } else {
             self.presentValidationAlertWithTitle("Error", message: "One of your fields is empty.")

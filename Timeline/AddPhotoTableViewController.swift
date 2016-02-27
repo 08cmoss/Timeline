@@ -9,6 +9,10 @@
 import UIKit
 
 class AddPhotoTableViewController: UITableViewController {
+    
+    @IBOutlet weak var addPhotoButton: UIButton!
+    @IBOutlet weak var captionTextField: UITextField!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

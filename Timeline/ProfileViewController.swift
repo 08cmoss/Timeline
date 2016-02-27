@@ -87,6 +87,15 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource{
             if let user = user {
             destinationViewController?.updateWithUser(user)
             }
+        } else if segue.identifier == "profileToPostSegue" {
+            if let cell = sender as? UICollectionViewCell, let indexPath = collectionView.indexPathForCell(cell) {
+                
+                let selectedPost = userPosts[indexPath.item]
+                
+                let destinationViewController = segue.destinationViewController as? PostDetailTableViewController
+                
+                destinationViewController?.post = selectedPost
+            }
         }
     }
     

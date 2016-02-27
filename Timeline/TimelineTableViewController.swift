@@ -9,9 +9,12 @@
 import UIKit
 
 class TimelineTableViewController: UITableViewController {
+    
+    var posts: [Post] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
     }
     
@@ -20,7 +23,9 @@ class TimelineTableViewController: UITableViewController {
             self.tabBarController?.performSegueWithIdentifier("presentModally", sender: self)
             
         } else {
+            loadTimelineForUser(UserController.sharedController.currentUser)
             self.tableView.reloadData()
+            
         }
     }
 
@@ -38,18 +43,34 @@ class TimelineTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return posts.count
+    }
+    
+    func loadTimelineForUser(user: User) {
+        PostController.fetchTimelineForUser(user) { (posts) -> Void in
+            self.posts = posts
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+              self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            })
+        }
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("timelineCell", forIndexPath: indexPath) as! PostTableViewCell
+        
+        let post = posts[indexPath.row]
+        
+        cell.updateWithPost(post)
+        
         return cell
     }
-    */
+    
+    @IBAction func userRefreshedTable(sender: AnyObject) {
+        loadTimelineForUser(UserController.sharedController.currentUser)
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -86,14 +107,20 @@ class TimelineTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toPostDetailSegue" {
+            if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPathForCell(cell) {
+            let destinationViewController = segue.destinationViewController as? PostDetailTableViewController
+            let selectedPost = posts[indexPath.row]
+                destinationViewController?.post = selectedPost
+            }
+        }
+        
     }
-    */
+    
 
 }

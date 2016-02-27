@@ -283,11 +283,17 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                             <state key="normal" title="Add Photo"/>
+                            <connections>
+                                <action selector="addPhotoButtonTapped:" destination="caE-cn-sz3" eventType="touchUpInside" id="m2S-Jt-00Y"/>
+                            </connections>
                         </button>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="for-rl-B7C">
                             <rect key="frame" x="0.0" y="509" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Submit"/>
+                            <connections>
+                                <action selector="submitButtonTapped:" destination="caE-cn-sz3" eventType="touchUpInside" id="3iY-n1-kEo"/>
+                            </connections>
                         </button>
                         <sections>
                             <tableViewSection id="Ahl-tz-CjJ">
@@ -316,7 +322,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="VYs-G6-qQB">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="WKz-Bt-G67"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="WKz-Bt-G67">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="caE-cn-sz3" id="YQS-nw-6Z9"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addPhotoButton" destination="C6h-Xj-MPp" id="Pmm-Dm-wsK"/>

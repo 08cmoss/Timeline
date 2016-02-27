@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class PostController {
     
@@ -14,7 +15,7 @@ class PostController {
         completion(posts: mockPosts())
     }
     
-    static func addPost(image: String, caption: String?, completion: (success: Bool, post: Post?) -> Void) {
+    static func addPost(image: UIImage, caption: String?, completion: (success: Bool, post: Post?) -> Void) {
         completion(success: true, post: mockPosts().first)
     }
     

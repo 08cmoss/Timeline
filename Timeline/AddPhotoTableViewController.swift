@@ -20,39 +20,15 @@ class AddPhotoTableViewController: UITableViewController, UIImagePickerControlle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
-        // Configure the cell...
 
-        return cell
-    }
-    */
     
     @IBAction func addPhotoButtonTapped(sender: AnyObject) {
         
@@ -66,7 +42,9 @@ class AddPhotoTableViewController: UITableViewController, UIImagePickerControlle
                 imagePicker.sourceType = .PhotoLibrary
                 self.presentViewController(imagePicker, animated: true, completion: nil)
             }))
-        } else if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
             alert.addAction(UIAlertAction(title: "Camera", style: .Default, handler: { (_) -> Void in
                 imagePicker.sourceType = .Camera
                 self.presentViewController(imagePicker, animated: true, completion: nil)
@@ -74,13 +52,13 @@ class AddPhotoTableViewController: UITableViewController, UIImagePickerControlle
         }
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
         
         
     }
     
     @IBAction func submitButtonTapped(sender: AnyObject) {
-        
+        self.view.window?.endEditing(true)
         if let image = image {
             PostController.addPost(image, caption: self.caption, completion: { (success, post) -> Void in
                 if post != nil {
@@ -95,14 +73,15 @@ class AddPhotoTableViewController: UITableViewController, UIImagePickerControlle
     }
     
 
-    @IBAction func cancelButtonTapped(sender: AnyObject) {
+    @IBAction func cancelButtonTapped() {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
         
     }
     
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        dismissViewControllerAnimated(true, completion: nil)
+        picker.dismissViewControllerAnimated(true, completion: nil)
         let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
         self.image = image

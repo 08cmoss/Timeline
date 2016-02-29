@@ -12,7 +12,7 @@ class UserController {
     
     static let sharedController = UserController()
     
-    var currentUser: User! = User(username: "Cameronn", bio: nil, url: nil, identifier: nil)
+    var currentUser: User! = User(username: "Cameron", bio: nil, url: nil, identifier: nil)
     
     static func userForIdentifier(identifier: String, completion: (user: User?) -> Void) {
         
@@ -39,15 +39,15 @@ class UserController {
     }
     
     static func authenticateUser(email: String, password: String, completion: (success: Bool, user: User?) -> Void) {
-        completion(success: true, user: mockUsers().first)
+        completion(success: true, user: mockUsers().last)
     }
     
     static func createUser(email: String, username: String, password: String, bio: String?, url: String?, completion: (success: Bool, user: User?) -> Void) {
-        completion(success: true, user: mockUsers().first)
+        completion(success: true, user: mockUsers().last)
     }
     
     static func updateUser(user: User, username: String, bio: String?, url: String?, completion: (success: Bool, user: User?) -> Void) {
-        completion(success: true, user: mockUsers().first)
+        completion(success: true, user: mockUsers().last)
     }
     
     static func logOutCurrentUser() {
@@ -59,9 +59,9 @@ class UserController {
     static func mockUsers() -> [User] {
         
         
-        let user1 = User(username: "Cameron", bio: nil, url: nil, identifier: nil)
-        let user2 = User(username: "Jake", bio: nil, url: nil, identifier: nil)
-        let user3 = User(username: "Michael", bio: nil, url: nil, identifier: nil)
+        let user1 = User(username: "Cameron", bio: "junior iOS developer", url: nil, identifier: nil)
+        let user2 = User(username: "Jake", bio: "Savant", url: nil, identifier: nil)
+        let user3 = User(username: "Michael", bio: "iOS developer", url: nil, identifier: nil)
         return [user1, user2, user3]
         
     }

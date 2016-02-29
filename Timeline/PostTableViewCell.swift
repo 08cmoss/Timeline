@@ -26,9 +26,9 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func updateWithPost(post: Post) {
-        likesLabel.text = "Likes \(post.likes.count)"
-        commentsLabel.text = "Comments \(post.comments.count)"
-        postImageView.image = nil
+        self.likesLabel.text = "\(post.likes.count) likes"
+        self.commentsLabel.text = "\(post.comments.count) comments"
+        self.postImageView.image = nil
         
         ImageController.imageForIdentifier(post.imageEndPoint) { (image) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in

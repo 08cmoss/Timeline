@@ -23,12 +23,18 @@ class LoginSignUpViewController: UIViewController {
         case Edit
     }
     
-    var mode: ViewMode = .Edit
+    var mode = ViewMode.SignUp
     var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         updateViewBasedOnMode()
     }
     
@@ -59,17 +65,10 @@ class LoginSignUpViewController: UIViewController {
     func updateViewBasedOnMode() {
         switch mode {
         case .SignUp:
-            usernameTextField.hidden = false
-            emailTextField.hidden = false
-            passwordTextField.hidden = false
-            bioTextField.hidden = false
-            websiteTextField.hidden = false
             actionButton.setTitle("Sign Up", forState: .Normal)
             
         case .Login:
             usernameTextField.hidden = true
-            emailTextField.hidden = false
-            passwordTextField.hidden = false
             bioTextField.hidden = true
             websiteTextField.hidden = true
             actionButton.setTitle("Login", forState: .Normal)

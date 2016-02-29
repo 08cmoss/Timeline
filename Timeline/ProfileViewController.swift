@@ -21,19 +21,15 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.user == nil {
-            self.user = UserController.sharedController.currentUser
+        if user == nil {
+            user = UserController.sharedController.currentUser
             editBarButtonItem.enabled = true
         }
-        print(user)
-
-        // Do any additional setup after loading the view.
+        //print(user)
+        updateBasedOnUser()
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -43,33 +39,43 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource{
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let postCell = collectionView.dequeueReusableCellWithReuseIdentifier("collectionCell", forIndexPath: indexPath) as! ImageCollectionViewCell
         let post = userPosts[indexPath.item]
-        postCell.updateWithImageIdentifier(post.identifier ?? "")
+        postCell.updateWithImageIdentifier(post.imageEndPoint)
         return postCell
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerCell =  collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "headerCell", forIndexPath: indexPath) as! ProfileHeaderCollectionReusableView
-        if let user = user {
-        headerCell.updateWithUser(user)
-        }
+        
+        headerCell.updateWithUser(user!)
         headerCell.delegate = self
+        
         return headerCell
     }
     
     
     
     func updateBasedOnUser() {
-        self.title = user?.username
-        if let user = user {
-        PostController.fetchTimelineForUser(user) { (results) -> Void in
-            self.userPosts = results
+        
+        guard let user = user else { return }
+        title = user.username
+        
+        PostController.postsForUser(user) { (posts) -> Void in
+            if let posts = posts {
+                self.userPosts = posts
+            } else {
+                self.userPosts = []
+            }
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.collectionView.reloadData()
             })
             
             }
-        }
     }
+    
+    func logoutButtonTapped() {
+        
+    }
+    
     
 
     
@@ -103,8 +109,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource{
 }
 extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
     func userTappedURLButton() {
-        if let user = user {
-            let safariVC = SFSafariViewController(URL: NSURL(string: user.url ?? "")!)
+        if let profileURL = NSURL(string: user!.url!) {
+            
+            let safariVC = SFSafariViewController(URL: profileURL)
+            
             self.presentViewController(safariVC, animated: true, completion: nil)
         }
     }
@@ -117,7 +125,7 @@ extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
             
             tabBarController?.selectedViewController = tabBarController?.viewControllers![0]
             
-        }else {
+        } else {
             UserController.userFollowsUser(UserController.sharedController.currentUser, user2: user, completion:{ (followsUser) -> Void in
                 if followsUser {
                     UserController.unfollowUser(self.user!, completion: { (success) -> Void in

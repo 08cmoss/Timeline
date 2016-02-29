@@ -36,10 +36,6 @@ class TimelineTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -48,6 +44,7 @@ class TimelineTableViewController: UITableViewController {
     
     func loadTimelineForUser(user: User) {
         PostController.fetchTimelineForUser(user) { (posts) -> Void in
+            
             self.posts = posts
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
               self.tableView.reloadData()

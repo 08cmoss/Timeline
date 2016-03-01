@@ -8,18 +8,35 @@
 
 import Foundation
 
-struct Comment: Equatable {
+struct Comment: Equatable, FirebaseType {
+    
+    private let postKey = "post"
+    private let usernameKey = "username"
+    private let textKey = "text"
+    var endpoint: String {
+        return "/posts/\(self.postIdentifier)/comments/"
+    }
+    var jsonValue: [String: AnyObject] {
+        return [textKey: text, postKey: postIdentifier, usernameKey: username]
+    }
     
     var username: String
     var text: String
     var postIdentifier: String
     var identifier: String?
     
-    init(username: String, text: String, postIdentifier: String, identifier: String?) {
+    init(username: String, text: String, postIdentifier: String, identifier: String? = nil) {
         self.username = username
         self.text = text
         self.postIdentifier = postIdentifier
-        self.identifier = nil
+        self.identifier = identifier
+    }
+    init?(json: [String : AnyObject], identifier: String) {
+        guard let postIdentifier = json[postKey] as? String, let username = json[usernameKey] as? String, let text = json[textKey] as? String else { return nil }
+        self.postIdentifier = postIdentifier
+        self.username = username
+        self.text = text
+        self.identifier = identifier
     }
 }
 

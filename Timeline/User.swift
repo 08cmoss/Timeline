@@ -8,17 +8,35 @@
 
 import Foundation
 
-struct User: Equatable {
+struct User: Equatable, FirebaseType {
     
+    private let usernameKey = "username"
+    private let bioKey = "bio"
+    private let urlKey = "url"
+    var endpoint: String {
+        return "/users/"
+    }
+    var jsonValue: [String: AnyObject] {
+        return [usernameKey: username, bioKey: bio ?? "", urlKey: url ?? ""]
+    }
     var username: String
     var bio: String?
     var url: String?
     var identifier: String?
     
-    init(username: String, bio: String?, url: String?, identifier: String?) {
+    
+    init(username: String, bio: String?, url: String?, identifier: String? = nil) {
         self.username = username
         self.bio = nil
         self.url = nil
+        self.identifier = identifier
+    }
+    
+    init?(json: [String : AnyObject], identifier: String) {
+        guard let username = json[usernameKey] as? String, let bio = json[bioKey] as? String, let url = json[urlKey] as? String else { return nil }
+        self.username = username
+        self.bio = bio
+        self.url = url
         self.identifier = identifier
     }
 }

@@ -37,7 +37,7 @@ class FirebaseController {
     }
 }
 protocol FirebaseType {
-    var identifier: [String]? { get set }
+    var identifier: String? { get set }
     var endpoint: String { get }
     var jsonValue: [String: AnyObject] { get }
     

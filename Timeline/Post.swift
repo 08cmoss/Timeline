@@ -8,16 +8,32 @@
 
 import Foundation
 
-struct Post: Equatable {
-    
+struct Post: Equatable, FirebaseType {
+    private let usernameKey = "username"
+    private let imageEndPointKey = "imageEndPoint"
+    private let captionKey = "caption"
+    private let commentsKey = "comments"
+    private let likesKey = "likes"
     var imageEndPoint: String
     var caption: String?
     var username: String
     var comments: [Comment]
     var likes: [Like]
     var identifier: String?
+    var endpoint: String {
+        return "/posts/"
+    }
+    var jsonValue: [String: AnyObject] {
+        var json: [String: AnyObject] = [usernameKey: username, imageEndPointKey: imageEndPoint, commentsKey: comments.map({$0.jsonValue}), likesKey: likes.map({$0.jsonValue})]
+        if let caption = caption {
+            json.updateValue(caption, forKey: captionKey)
+        }
+        return json
+    }
     
-    init(imageEndPoint: String, caption: String?, username: String, comments: [Comment], likes: [Like], identifier: String?) {
+    
+    
+    init(imageEndPoint: String, caption: String?, username: String, comments: [Comment], likes: [Like], identifier: String? = nil) {
         
         self.imageEndPoint = imageEndPoint
         self.caption = nil
@@ -26,6 +42,23 @@ struct Post: Equatable {
         self.likes = []
         self.identifier = identifier
         
+    }
+    init?(json: [String : AnyObject], identifier: String) {
+        guard let username = json[usernameKey] as? String, let imageEndPoint = json[imageEndPointKey] as? String, let caption = json[captionKey] as? String else { return nil }
+        if let commentDictionaries = json[commentsKey] as? [String: AnyObject] {
+            self.comments = commentDictionaries.flatMap({Comment(json: $0.1 as! [String: AnyObject], identifier: $0.0)})
+        } else {
+            self.comments = []
+        }
+        
+        if let likeDictionaries = json[likesKey] as? [String: AnyObject] {
+            self.likes = likeDictionaries.flatMap({Like(json: $0.1 as! [String: AnyObject], identifier: $0.0)})
+        } else {
+            self.likes = []
+        }
+        self.username = username
+        self.imageEndPoint = imageEndPoint
+        self.caption = caption
     }
     
     

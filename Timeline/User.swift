@@ -14,7 +14,7 @@ struct User: Equatable, FirebaseType {
     private let bioKey = "bio"
     private let urlKey = "url"
     var endpoint: String {
-        return "/users/"
+        return "users"
     }
     var jsonValue: [String: AnyObject] {
         return [usernameKey: username, bioKey: bio ?? "", urlKey: url ?? ""]
@@ -25,7 +25,7 @@ struct User: Equatable, FirebaseType {
     var identifier: String?
     
     
-    init(username: String, bio: String?, url: String?, identifier: String? = nil) {
+    init(username: String, bio: String? = nil, url: String? = nil, identifier: String? = nil) {
         self.username = username
         self.bio = nil
         self.url = nil

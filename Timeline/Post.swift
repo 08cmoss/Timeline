@@ -21,7 +21,7 @@ struct Post: Equatable, FirebaseType {
     var likes: [Like]
     var identifier: String?
     var endpoint: String {
-        return "/posts/"
+        return "posts"
     }
     var jsonValue: [String: AnyObject] {
         var json: [String: AnyObject] = [usernameKey: username, imageEndPointKey: imageEndPoint, commentsKey: comments.map({$0.jsonValue}), likesKey: likes.map({$0.jsonValue})]
@@ -33,13 +33,13 @@ struct Post: Equatable, FirebaseType {
     
     
     
-    init(imageEndPoint: String, caption: String?, username: String, comments: [Comment], likes: [Like], identifier: String? = nil) {
+    init(imageEndPoint: String, caption: String?, username: String, comments: [Comment] = [], likes: [Like] = [], identifier: String? = nil) {
         
         self.imageEndPoint = imageEndPoint
         self.caption = nil
         self.username = username
-        self.comments = []
-        self.likes = []
+        self.comments = comments
+        self.likes = likes
         self.identifier = identifier
         
     }

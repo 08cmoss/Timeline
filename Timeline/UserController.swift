@@ -10,16 +10,52 @@ import Foundation
 
 class UserController {
     
+    private let kUser = "userKey"
+    
     static let sharedController = UserController()
     
-    var currentUser: User! = User(username: "Cameron", bio: nil, url: nil, identifier: nil)
+    var currentUser: User! {
+        get {
+            
+            guard let uid = FirebaseController.base.authData.uid,
+                let userDictionary = NSUserDefaults.standardUserDefaults().valueForKey(kUser) as? [String: AnyObject] else {
+                    
+                    return nil
+            }
+            
+            return User(json: userDictionary, identifier: uid)
+        }
+        
+        set {
+            if let newValue = newValue {
+                NSUserDefaults.standardUserDefaults().setValue(newValue.jsonValue, forKey: kUser)
+                NSUserDefaults.standardUserDefaults().synchronize()
+            } else {
+                NSUserDefaults.standardUserDefaults().removeObjectForKey(kUser)
+                NSUserDefaults.standardUserDefaults().synchronize()
+            }
+        }
+    }
     
     static func userForIdentifier(identifier: String, completion: (user: User?) -> Void) {
-        
+        FirebaseController.dataAtEndPoint("users/\(identifier)") { (data) -> Void in
+            if let data = data as? [String: AnyObject] {
+                let user = User(json: data, identifier: identifier)
+                completion(user: user)
+            } else {
+                completion(user: nil)
+            }
+        }
     }
     
     static func fetchAllUsers(completion: (user: [User]) -> Void) {
-        completion(user: mockUsers())
+        FirebaseController.dataAtEndPoint("users") { (data) -> Void in
+            if let data = data as? [String: AnyObject] {
+                let user = data.flatMap({ (User(json: $0.0, identifier: $0.1)) -> SequenceType in
+                    <#code#>
+                })
+            }
+        }
     }
     
     static func followUser(user: User, completion: (success: Bool) -> Void) {

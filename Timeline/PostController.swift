@@ -45,7 +45,7 @@ class PostController {
     }
     
     static func addPost(image: UIImage, caption: String?, completion: (success: Bool, post: Post?) -> Void) {
-        ImageController.uploadImage("\(image)") { (identifier) -> Void in
+        ImageController.uploadImage(image) { (identifier) -> Void in
             
             if let identifier = identifier {
                 var post = Post(imageEndPoint: identifier, caption: caption, username: UserController.sharedController.currentUser.username)
